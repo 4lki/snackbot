@@ -1,0 +1,36 @@
+<div class="grid-container" *ngIf="display == 'list'">
+    <div fxLayout="row" fxLayoutAlign="space-between end" >
+      <h1 class="mat-h1">Member</h1>
+      <button mat-raised-button color="accent" (click)="openDialog()">Neues Mitglied?</button>
+    </div>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+      <ng-container matColumnDef="first_name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Vorname </th>
+        <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="last_name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nachname </th>
+        <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="team">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Team </th>
+          <td mat-cell *matCellDef="let element"> {{element.team?.name || ''}} </td>
+        </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row  routerLink="/snacks" (click)="common.setActiveUser(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+<div class="grid-container" *ngIf="display != 'list'">
+    <h1 class="mat-h1">Member</h1>
+    <div fxLayout="row wrap" fxLayoutGap="2%">
+       <app-user fxFlex="23%" *ngFor="let i of members | async" [member]="i" routerLink="/snacks" (click)="common.setActiveUser(i)" ></app-user>
+    </div>
+</div>
+    

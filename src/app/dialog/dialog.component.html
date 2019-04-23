@@ -1,0 +1,50 @@
+<ng-container *ngIf="dialog === 'Card'">
+  <h1 mat-dialog-title>Kartenleser</h1>
+  <div mat-dialog-content>
+    <p>Bitte Chipkarte an den Leser halten!</p>
+  </div>
+  <mat-progress-spinner
+    mode="determinate"
+    [value]="percentage$ | async">
+  </mat-progress-spinner>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="accent" (click)="onNoClick()">Abbrechen</button>
+    <button mat-raised-button (click)="common.dummyRfid()">Demo Uuid</button>
+  
+  </div>
+</ng-container>
+<ng-container *ngIf="dialog === 'Confirm'">
+  <h1>Danke</h1>
+</ng-container>
+<ng-container *ngIf='dialog === "AddUser"'>
+    <h1 mat-dialog-title>Join the Church of Starterkitchen!</h1>
+    <div mat-dialog-content>
+      <form fxLayout="column">
+        <mat-form-field>
+            <label>Vorname</label>
+            <input matInput type="text" [(ngModel)]="user.first_name" name="first_name">
+        </mat-form-field>
+        <mat-form-field>
+            <label>Nachname</label>
+            <input matInput type="text" [(ngModel)]="user.last_name" name="last_name">
+        </mat-form-field>
+        <mat-form-field>
+            <label>E-Mail</label>
+            <input matInput type="text" [(ngModel)]="user.email" name="email">
+        </mat-form-field>
+        <!-- <mat-form-field>
+          <mat-select>
+            <option *ngFor="let team of teams" [value]="team.id"> team.name </option>
+          </mat-select>
+        </mat-form-field>   -->
+      </form>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-raised-button color="accent" (click)="onNoClick()">Abbrechen</button>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="dialog == 'Load'">
+  <mat-progress-spinner mode="indeterminate">
+  </mat-progress-spinner>
+</ng-container>

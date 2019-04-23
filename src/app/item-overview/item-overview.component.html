@@ -1,0 +1,7 @@
+<div class="grid-container">
+  <h1 class="mat-h1">{{collectionName}}</h1>
+  <div fxLayout="row" fxLayoutGap="10px">
+     <app-item fxFlex="25%" *ngFor="let i of items |async" [item]="i"></app-item>
+</div>
+</div>
+  
