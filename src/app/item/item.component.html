@@ -1,0 +1,24 @@
+<mat-card>
+  <img mat-card-image *ngIf="item.image; else placeholder" [src]="item.image.data.thumbnails[0].url">
+  <ng-template #placeholder>
+    <img mat-card-image src="./assets/snack-default.png">
+  </ng-template>
+  <mat-card-title-group>
+      <mat-card-title>
+        {{item.name}}
+        <!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item>Expand</button>
+          <button mat-menu-item>Remove</button>
+        </mat-menu> -->
+      </mat-card-title>
+  </mat-card-title-group>
+  <mat-card-content class="dashboard-card-content" >
+    <p class="price">{{item.price | currency:'EUR'}}</p>
+  </mat-card-content>
+  <mat-card-actions align="right">
+      <a mat-raised-button color="accent" (click)="addToCart(item)"><mat-icon>add_shopping_cart</mat-icon></a>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,52 @@
+
+<ng-container>
+    <mat-card *ngIf="common.activeUser; let user;">
+        <mat-card-subtitle>Benutzer</mat-card-subtitle>
+        <ng-container>
+            <div fxLayout="row" fxLayoutAlign="space-between center">    
+                <mat-card-title>
+                    {{user.first_name}} {{user.last_name}}
+                </mat-card-title>
+               
+                <button mat-mini-fab (click)="common.logoutActiveUser()"><mat-icon>close</mat-icon></button>
+            </div>
+            <mat-card-content>
+                <p>
+                    Kontostand: {{user.balance | currency:"EUR":"symbol"}}
+                </p>
+            </mat-card-content>
+        </ng-container>
+       <!--  <ng-template #noUser>
+            <div fxLayout="row" fxLayoutAlign="space-between">    
+                <button mat-raised-button color="primary" routerLink="user">Wer bist du?</button>
+            </div>
+        </ng-template> -->
+    </mat-card>
+    <mat-list>
+        <h3 mat-subheader>Warenkorb</h3>
+        <ng-container *ngIf="cartTotal > 0; else cartEmpty;" >
+            <mat-list-item *ngFor="let item of common.cart">
+                <h3 mat-line>{{item.name}}</h3>
+                <div mat-line fxLayout="row" fxLayoutAlign="space-between center">
+                    <span> {{item.amount}}x</span>
+                    <a mat-icon-button color="accent" (click)="common.removeFromCart(item)"><mat-icon>remove</mat-icon></a>
+                    <a mat-icon-button color="accent" (click)="common.addToCart(item)"><mat-icon>add</mat-icon> </a>
+                </div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <span class="price">{{cartTotal | currency:"EUR":"symbol"}}</span> 
+            </mat-list-item>
+        </ng-container>
+        <ng-container *ngIf="common.cart.length > 0 ">
+            <mat-list-item>
+                <button mat-raised-button color="accent" (click)="checkOrder()">Katsching!</button> 
+            </mat-list-item>
+        </ng-container>
+    </mat-list>
+    </ng-container>
+    <ng-template #cartEmpty>
+        <mat-card>
+            Körbchen leer :/
+        </mat-card>
+</ng-template>
